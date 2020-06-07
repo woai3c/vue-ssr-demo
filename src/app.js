@@ -1,17 +1,20 @@
 import Vue from 'vue'
-import App from './App.vue'
-import { createRouter } from './router'
+import App from './App.vue';
+import { createRouter } from './router';
+import { createStore } from './store'
 
-export function createApp() {
-    // 创建 router 实例
-    const router = createRouter()
+import { sync } from 'vuex-router-sync'
 
-    const app = new Vue({
-        // 注入 router 到根 Vue 实例
-        router,
-        render: h => h(App)
-    })
+export function createApp(context) {
+  const router = createRouter();
+  const store = createStore();
 
-    // 返回 app 和 router
-    return { app, router }
-}
+  sync(store, router)
+
+  const app = new Vue({
+    router,
+    store,
+    render: h => h(App)
+  });
+  return { app, router, store };
+};
