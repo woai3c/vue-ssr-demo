@@ -27,12 +27,12 @@ export default {
   },
   methods: {
     test() {
-      axios.post('http://localhost:9003/test').then(res => {
+      axios.post('http://localhost:8080/test').then(res => {
         console.log(res)
       })
     },
     get() {
-      axios.get('http://localhost:9003/get').then(res => {
+      axios.get('http://localhost:8080/get').then(res => {
         console.log(res)
       })
     }
