@@ -14,12 +14,12 @@ export function createStore() {
     actions: {
       fetchItem({commit}, id) {
         return fetchItem(id).then(res => {
-          commit('setItem', {id, item: res.data})
+          commit('setItem', {id, item: res.data.data})
         })
       },
       fetchList({commit}){
         return fetchList().then(res => {
-          commit('setList', res.data.list)
+          commit('setList', res.data.data)
         })
       }
     },

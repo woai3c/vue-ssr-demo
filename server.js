@@ -37,7 +37,6 @@ function createRenderer(bundle, options) {
 }
 
 function render(req, res) {
-  console.log(req.url)
   const cacheable = isCacheable(req)
   if (cacheable) {
     const hit = microCache.get(req.url)
@@ -69,7 +68,6 @@ function render(req, res) {
     if (err) {
       return handleError(err);
     }
-    console.log(req.url)
     console.log(html)
     res.send(html);
     if (cacheable) {
@@ -103,10 +101,61 @@ if (isProd) {
   );
 }
 
-app.get('/get', (req, res) => {
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+  console.log(`server started at localhost:${port}`);
+});
+
+app.get('/gettest', (req, res) => {
   res.send({
       code: 0,
-      data: 'get html'
+      data: 'gettest'
+  })
+})
+
+const list = [
+  {
+    id: 0,
+    title: '这是一个测试标题0',
+    content: '这是测试内容0'
+  },
+  {
+    id: 1,
+    title: '这是一个测试标题1',
+    content: '这是测试内容1'
+  },
+  {
+    id: 2,
+    title: '这是一个测试标题2',
+    content: '这是测试内容2'
+  },
+]
+
+app.get('/list', (req, res) => {
+  res.send({
+    code: 0,
+    data: list
+  })
+})
+
+app.get('/detail', (req, res) => {
+  res.send({
+    code: 0,
+    data: list[req.query.id]
+  })
+})
+
+app.post('/posttest', (req, res) => {
+  res.send({
+      code: 0,
+      data: 'posttest'
+  })
+})
+
+app.post('/somethingelse', (req, res) => {
+  res.send({
+      code: 0,
+      data: 'somethingelse'
   })
 })
 
@@ -118,21 +167,3 @@ app.get(
         readyPromise.then(() => render(req, res));
       }
 );
-
-const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log(`server started at localhost:${port}`);
-});
-
-app.post('/test', (req, res) => {
-  res.send({
-      code: 0,
-      data: [
-        {
-          name: 'test',
-          value: 'dklk',
-          url: req.url
-        }
-      ]
-  })
-})

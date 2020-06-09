@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export function fetchItem(id) {
-  return axios.get('https://api.mimei.net.cn/api/v1/article/' + id);
+  return axios.get('http://localhost:8080/detail?id=' + id);
 }
 export function fetchList() {
-  return axios.get('https://api.mimei.net.cn/api/v1/article/');
+  return axios.get('http://localhost:8080/list');
 }
