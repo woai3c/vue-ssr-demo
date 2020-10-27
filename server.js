@@ -20,10 +20,12 @@ const isCacheable = req => {
   return true
 }
 
-const serve = (path, cache) =>
-  express.static(resolve(path), {
+const serve = (path, cache) => {
+  return express.static(resolve(path), {
     maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0
   });
+}
+ 
 app.use('/dist', serve('./dist', true));
 
 function createRenderer(bundle, options) {
