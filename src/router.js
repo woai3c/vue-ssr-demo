@@ -5,12 +5,12 @@ const Item = () => import('./views/Item.vue')
 
 Vue.use(Router)
 
-export function createRouter(){
-  return new Router({
-    mode: 'history',
-    routes: [
-      { path: '/', component: Home },
-      { path: '/item/:id', component: Item }
-    ]
-  })
+export function createRouter() {
+    return new Router({
+        mode: 'history',
+        routes: [
+            { path: '/', component: Home },
+            { path: '/item/:id', component: Item }
+        ]
+    })
 }

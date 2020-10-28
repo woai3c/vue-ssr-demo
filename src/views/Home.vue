@@ -1,17 +1,21 @@
 <template>
-  <div>
-    <h3>文章列表</h3>
-    <div class="list" v-for="i in list">
-      <router-link :to="{path:'/item/'+i.id}">{{i.title}}</router-link>
-    </div>
-    <img src="https://avatars0.githubusercontent.com/u/22117876?s=460&u=7bd8f32788df6988833da6bd155c3cfbebc68006&v=4">
     <div>
-        <button @click="gettest">gettest</button>
+        <h3>文章列表</h3>
+        <div class="list" v-for="i in list" :key="i.id">
+            <router-link :to="{ path: '/item/' + i.id }">{{
+                i.title
+            }}</router-link>
+        </div>
+        <img
+            src="https://avatars0.githubusercontent.com/u/22117876?s=460&u=7bd8f32788df6988833da6bd155c3cfbebc68006&v=4"
+        />
+        <div>
+            <button @click="gettest">gettest</button>
+        </div>
+        <div>
+            <button @click="posttest">posttest</button>
+        </div>
     </div>
-    <div>
-        <button @click="posttest">posttest</button>
-    </div>
-  </div>
 </template>
 <script>
 import axios from 'axios';

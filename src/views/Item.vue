@@ -1,19 +1,19 @@
 <template>
-  <div>
-    <span v-if="!item">loading</span>
-    <div v-if="item">
-     <h2>{{item.title}}</h2>
-      
-      <div v-html="item.content"></div>
-    </div>
+    <div>
+        <span v-if="!item">loading</span>
+        <div v-if="item">
+            <h2>{{ item.title }}</h2>
 
-    <div>
-      <button @click="$router.back()">back</button>
+            <div v-html="item.content"></div>
+        </div>
+
+        <div>
+            <button @click="$router.back()">back</button>
+        </div>
+        <div>
+            <button @click="ste">somethingelse</button>
+        </div>
     </div>
-    <div>
-      <button @click="ste">somethingelse</button>
-    </div>
-  </div>
 </template>
 <script>
 import axios from 'axios'
