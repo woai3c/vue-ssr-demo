@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-const Home = () => import('./views/Home.vue')
-const Item = () => import('./views/Item.vue')
 
 Vue.use(Router)
 
@@ -9,8 +7,42 @@ export function createRouter() {
     return new Router({
         mode: 'history',
         routes: [
-            { path: '/', component: Home },
-            { path: '/item/:id', component: Item }
+            {
+                path: '/',
+                redirect: '/Home'
+            },
+            { 
+                path: '/home',
+                component: () => import('@/views/Home/Home'),
+                children: [
+                    {
+                        path: 'two',
+                        component: () => import('@/views/Home/Two'),
+                        children: [
+                            {
+                                path: 'three',
+                                component: () => import('@/views/Home/Three'),
+                            }
+                        ]
+                    }
+                ]
+            },
+            { 
+                path: '/table',
+                component: () => import('@/views/Table/Table'),
+                children: [
+                    {
+                        path: '/table/two',
+                        component: () => import('@/views/Table/Two'),
+                        children: [
+                            {
+                                path: '/table/two/three',
+                                component: () => import('@/views/Table/Three'),
+                            }
+                        ]
+                    }
+                ]
+            },
         ]
     })
 }

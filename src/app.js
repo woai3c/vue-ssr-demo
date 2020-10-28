@@ -17,5 +17,6 @@ export function createApp(context) {
         store,
         render: h => h(App)
     })
+    
     return { app, router, store }
 }

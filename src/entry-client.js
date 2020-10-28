@@ -14,10 +14,8 @@ Vue.mixin({
                 route: this.$route
             })
         }
-    }
-})
+    },
 
-Vue.mixin({
     beforeRouteUpdate(to, from, next) {
         const { asyncData } = this.$options
         if (asyncData) {
@@ -30,7 +28,7 @@ Vue.mixin({
         }
     }
 })
-console.log(window.__INITIAL_STATE__)
+
 if (window.__INITIAL_STATE__) {
     store.replaceState(window.__INITIAL_STATE__)
 }

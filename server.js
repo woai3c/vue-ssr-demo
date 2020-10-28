@@ -14,6 +14,7 @@ const microCache = LRU({
     max: 100,
     maxAge: 1000 // 重要提示：条目在 1 秒后过期。
 })
+
 const isCacheable = req => {
     // 实现逻辑为，检查请求是否是用户特定(user-specific)。
     // 只有非用户特定(non-user-specific)页面才会缓存
@@ -66,11 +67,12 @@ function render(req, res) {
         title: 'SSR 测试', // default title
         url: req.url
     }
+
     renderer.renderToString(context, (err, html) => {
         if (err) {
             return handleError(err)
         }
-        console.log(html)
+
         res.send(html)
         if (cacheable) {
             microCache.set(req.url, html)
@@ -103,61 +105,35 @@ if (isProd) {
     )
 }
 
-const port = process.env.PORT || 8080
+const port = 8080
+
 app.listen(port, () => {
     console.log(`server started at localhost:${ port }`)
 })
 
-app.get('/gettest', (req, res) => {
+let apiData = {
+    one: '一级路由数据',
+    two: '二级路由数据',
+    three: '三级路由数据'
+}
+
+app.get('/fetchData', (req, res) => {
     res.send({
         code: 0,
-        data: 'gettest'
+        data: apiData[req.query.key]
     })
 })
 
-const list = [
-    {
-        id: 0,
-        title: '这是一个测试标题0',
-        content: '这是测试内容0'
-    },
-    {
-        id: 1,
-        title: '这是一个测试标题1',
-        content: '这是测试内容1'
-    },
-    {
-        id: 2,
-        title: '这是一个测试标题2',
-        content: '这是测试内容2'
-    },
-]
+app.post('/changeData', (req, res) => {
+    const data = {
+        one: ' x 级路由数据',
+        two: ' xx 级路由数据',
+        three: ' xxx 级路由数据'
+    }
 
-app.get('/list', (req, res) => {
     res.send({
         code: 0,
-        data: list
-    })
-})
-
-app.get('/detail', (req, res) => {
-    res.send({
-        code: 0,
-        data: list[req.query.id]
-    })
-})
-
-app.post('/posttest', (req, res) => {
-    res.send({
-        code: 0,
-        data: 'posttest'
-    })
-})
-
-app.post('/somethingelse', (req, res) => {
-    res.send({
-        code: 0,
-        data: 'somethingelse'
+        data,
     })
 })
 
