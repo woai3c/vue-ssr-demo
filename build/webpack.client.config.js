@@ -4,7 +4,6 @@ const base = require('./webpack.base.config')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 
 module.exports = merge(base, {
-    mode: 'development',
     entry: {
         app: './src/entry-client.js'
     },
@@ -17,5 +16,27 @@ module.exports = merge(base, {
             'process.env.VUE_ENV': '"client"'
         }),
         new VueSSRClientPlugin()
-    ]
+    ],
+    optimization: {
+        runtimeChunk: {
+            name: 'manifest'
+        },
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    name: 'chunk-vendors',
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: -10,
+                    chunks: 'initial'
+                },
+                common: {
+                    name: 'chunk-common',
+                    minChunks: 2,
+                    priority: -20,
+                    chunks: 'initial',
+                    reuseExistingChunk: true
+                }
+            },
+        }
+    },
 })

@@ -2,6 +2,7 @@ const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 
 const isProd = process.env.NODE_ENV === 'production'
+
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
 }
@@ -12,7 +13,10 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, '../dist'),
         publicPath: '/dist/',
-        filename: '[name].[chunkhash].js'
+        // chunkhash 同属一个 chunk 中的文件修改了，文件名会发生变化 
+        // contenthash 只有文件自己的内容变化了，文件名才会变化
+        filename: '[name].[contenthash].js',
+        chunkFilename: '[name].[contenthash].js',
     },
     resolve: {
         extensions: ['.js', '.vue', '.json', '.css', '.scss'],
@@ -55,5 +59,5 @@ module.exports = {
             }
         ]
     },
-    plugins: [new VueLoaderPlugin()]
+    plugins: [new VueLoaderPlugin()],
 }

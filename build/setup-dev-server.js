@@ -11,7 +11,6 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const clientConfig = require('./webpack.client.config')
 const serverConfig = require('./webpack.server.config')
 
-
 const readFile = (fs, file) => {
     try {
         return fs.readFileSync(path.join(clientConfig.output.path, file), 'utf-8')
