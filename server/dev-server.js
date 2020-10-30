@@ -1,6 +1,6 @@
 const path = require('path')
 const express = require('express')
-const interface = require('./interface')
+const setApi = require('./api')
 const { createBundleRenderer } = require('vue-server-renderer')
 const devServer = require('../build/setup-dev-server')
 const resolve = (file) => path.resolve(__dirname, file)
@@ -49,7 +49,7 @@ function render(req, res) {
         if (err) {
             return handleError(err)
         }
-
+        
         res.send(html)
         console.log(`whole request: ${ Date.now() - startTime }ms`)
     })
@@ -73,7 +73,7 @@ app.listen(port, () => {
     console.log(`server started at localhost:${ port }`)
 })
 
-interface(app)
+setApi(app)
 
 app.get('*', (req, res) => {
     readyPromise.then(() => render(req, res))

@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="container">
         <p>Table 一级路由<router-link to="/home">切换到 Home</router-link></p>
-        <button @click="changeData">通过 ajax 改变路由数据</button>
+        <Button type="primary" @click="changeData">点击此按钮，通过 ajax 请求改变路由数据</Button>
         <p>通过 ajax 获取的{{ one }}</p>
         <router-link to="/table/two">跳到二级路由</router-link>
         <router-view />
@@ -24,3 +24,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.container {
+    font-size: 20px;
+    padding: 20px;
+}
+</style>

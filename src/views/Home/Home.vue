@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="container">
         <p>Home 一级路由<router-link to="/table">切换到 Table</router-link></p>
-        <button @click="changeData">通过 ajax 改变路由数据</button>
+        <Button type="primary" @click="changeData">点击此按钮，通过 ajax 请求改变路由数据</Button>
         <p>通过 ajax 获取的{{ one }}</p>
         <router-link to="/home/two">跳到二级路由</router-link>
         <router-view />
@@ -9,16 +9,13 @@
 </template>
 <script>
 export default {
-    asyncData({ store, route }){
+    asyncData({ store, route }) {
         return store.dispatch('fetchData', 'one')
     },
     computed: {
         one() {
             return this.$store.state.one
         }
-    },
-    mounted() {
-        this.dataPromise.then(res => console.log(res))
     },
     methods: {
         changeData() {
@@ -27,3 +24,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.container {
+    font-size: 20px;
+    padding: 20px;
+}
+</style>

@@ -1,16 +1,19 @@
 const fs = require('fs')
 const path = require('path')
 const express = require('express')
-const interface = require('./interface')
-const LRU = require('lru-cache')
+const setApi = require('./api')
+const LRU = require('lru-cache') // 缓存
 const { createBundleRenderer } = require('vue-server-renderer')
 const resolve = file => path.resolve(__dirname, file)
 
 const app = express()
+// 开启 gzip 压缩 https://github.com/woai3c/node-blog/blob/master/doc/optimize.md
+const compression = require('compression')
+app.use(compression())
 
 const microCache = LRU({
     max: 100,
-    maxAge: 60 * 60 * 24 * 1000 // 重要提示：条目在 1 天后过期。
+    maxAge: 60 * 60 * 24 * 1000 // 重要提示：缓存资源将在 1 天后过期。
 })
 
 const serve = (path) => {
@@ -81,6 +84,6 @@ app.listen(port, () => {
     console.log(`server started at localhost:${ port }`)
 })
 
-interface(app)
+setApi(app)
 
 app.get('*', render)
