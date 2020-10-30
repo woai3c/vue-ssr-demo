@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node ./server/dev-server.js --mode developmen",
+    "dev": "node ./server/dev-server.js",
     "server": "cross-env NODE_ENV=production node ./server/pro-server.js --mode production",
     "build": "rimraf dist && npm run build:client && npm run build:server",
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.client.config.js --progress --hide-modules --mode production",
@@ -15,7 +15,9 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.1",
+    "compression": "^1.7.4",
     "express": "^4.16.3",
+    "view-design": "^4.4.0",
     "vue": "^2.6.12",
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.6.12",
@@ -28,11 +30,14 @@
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-env": "^1.7.0",
     "chokidar": "^2.0.4",
+    "compression-webpack-plugin": "^6.0.4",
     "cross-env": "^5.2.0",
-    "file-loader": "^6.0.0",
-    "friendly-errors-webpack-plugin": "^1.7.0",
+    "css-loader": "^5.0.0",
+    "file-loader": "^6.2.0",
     "memory-fs": "^0.4.1",
+    "mini-css-extract-plugin": "^1.2.1",
     "rimraf": "^2.6.2",
+    "style-loader": "^2.0.0",
     "url-loader": "^4.1.0",
     "vue-loader": "^15.4.2",
     "vue-template-compiler": "^2.6.12",
@@ -41,6 +46,7 @@
     "webpack-dev-middleware": "^3.3.0",
     "webpack-hot-middleware": "^2.24.0",
     "webpack-merge": "^4.1.4",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "webpackbar": "^4.0.0"
   }
 }
