@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node ./server/dev-server.js",
+    "dev": "cross-env NODE_ENV=development rimraf dist && node ./server/dev-server.js",
     "server": "cross-env NODE_ENV=production node ./server/pro-server.js --mode production",
     "build": "rimraf dist && npm run build:client && npm run build:server",
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.client.config.js --progress --hide-modules --mode production",
