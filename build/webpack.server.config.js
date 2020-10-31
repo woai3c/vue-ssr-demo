@@ -28,7 +28,7 @@ module.exports = merge(base, {
         libraryTarget: 'commonjs2'
     },
     externals: nodeExternals({
-        whitelist: /\.css$/ // 防止将某些 import 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取这些扩展依赖
+        allowlist: /\.css$/ // 防止将某些 import 的包(package)打包到 bundle 中，而是在运行时(runtime)再去从外部获取这些扩展依赖
     }),
     plugins,
     module: {

@@ -11,7 +11,8 @@ const app = express()
 const compression = require('compression')
 app.use(compression())
 
-const microCache = LRU({
+// 新版本 需要加 new，旧版本不用
+const microCache = new LRU({
     max: 100,
     maxAge: 60 * 60 * 24 * 1000 // 重要提示：缓存资源将在 1 天后过期。
 })
