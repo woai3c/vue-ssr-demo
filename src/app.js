@@ -8,6 +8,11 @@ import 'view-design/dist/styles/iview.css'
 
 Vue.component('Button', Button)
 
+// 解决 [vue-router] failed to resolve async component default: referenceerror: window is not defined 问题
+if (typeof window === 'undefined') {
+    global.window = {}
+}
+
 export function createApp(context) {
     const router = createRouter()
     const store = createStore()
