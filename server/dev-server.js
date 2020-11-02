@@ -3,6 +3,7 @@ const express = require('express')
 const setApi = require('./api')
 const { createBundleRenderer } = require('vue-server-renderer')
 const devServer = require('../build/setup-dev-server')
+const favicon = require('serve-favicon')
 const resolve = (file) => path.resolve(__dirname, file)
 
 const app = express()
@@ -13,6 +14,7 @@ const serve = (path) => {
     })
 }
 
+app.use(favicon(resolve('../public/favicon.ico')))
 app.use('/dist', serve('../dist', true))
 
 function createRenderer(bundle, options) {
@@ -57,7 +59,7 @@ function render(req, res) {
 
 let renderer
 let readyPromise
-const templatePath = resolve('../src/index.template.html')
+const templatePath = resolve('../public/index.template.html')
 
 readyPromise = devServer(
     app,

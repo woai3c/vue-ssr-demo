@@ -4,12 +4,15 @@ const express = require('express')
 const setApi = require('./api')
 const LRU = require('lru-cache') // 缓存
 const { createBundleRenderer } = require('vue-server-renderer')
+const favicon = require('serve-favicon')
 const resolve = file => path.resolve(__dirname, file)
 
 const app = express()
 // 开启 gzip 压缩 https://github.com/woai3c/node-blog/blob/master/doc/optimize.md
 const compression = require('compression')
 app.use(compression())
+// 设置 favicon
+app.use(favicon(resolve('../public/favicon.ico')))
 
 // 新版本 需要加 new，旧版本不用
 const microCache = new LRU({
@@ -70,7 +73,7 @@ function render(req, res) {
     })
 }
 
-const templatePath = resolve('../src/index.template.html')
+const templatePath = resolve('../public/index.template.html')
 const template = fs.readFileSync(templatePath, 'utf-8')
 const bundle = require('../dist/vue-ssr-server-bundle.json')
 const clientManifest = require('../dist/vue-ssr-client-manifest.json') // 将js文件注入到页面中
